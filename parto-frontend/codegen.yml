@@ -1,0 +1,17 @@
+overwrite: true
+schema: ${NEXT_PUBLIC_HASURA_GRAPHQL_DOCKER_URL}:
+    headers:
+      "x-hasura-admin-secret": ${HASURA_ADMIN_SECRET}
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/graphql/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "typescript-graphql-files-modules"
+      - "typescript-document-nodes"
+      - "fragment-matcher"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
